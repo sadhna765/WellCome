@@ -1,0 +1,179 @@
+/* ==========================
+   Payment Container
+========================== */
+.payment-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f4f6f9;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.payment-container h2 {
+  text-align: center;
+  color: #198754;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+/* ==========================
+   Form Card
+========================== */
+.form-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.form-card label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: -10px;
+}
+
+.form-card input,
+.form-card select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+  border-color: #198754;
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.25);
+}
+
+.form-card input[readonly] {
+  background: #e9ecef;
+  font-weight: bold;
+}
+
+/* ==========================
+   Save Button
+========================== */
+.form-card button {
+  background: #198754;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  height: 45px;
+  align-self: end;
+}
+
+.form-card button:hover {
+  background: #157347;
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   Table Wrapper
+========================== */
+.table-wrapper {
+  background: white;
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+/* ==========================
+   Table
+========================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+thead {
+  background: #198754;
+  color: white;
+}
+
+thead th {
+  padding: 14px;
+  text-align: center;
+  font-size: 14px;
+}
+
+tbody td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e9ecef;
+}
+
+tbody tr:hover {
+  background: #f8f9fa;
+}
+
+/* ==========================
+   Status Colors
+========================== */
+tbody tr td:last-child {
+  font-weight: 600;
+}
+
+.status-paid {
+  color: #198754;
+}
+
+.status-pending {
+  color: #dc3545;
+}
+
+/* ==========================
+   Scrollbar
+========================== */
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #b0b0b0;
+  border-radius: 20px;
+}
+
+/* ==========================
+   Responsive
+========================== */
+@media (max-width: 768px) {
+
+  .payment-container {
+    padding: 10px;
+  }
+
+  .payment-container h2 {
+    font-size: 22px;
+  }
+
+  .form-card {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    min-width: 800px;
+  }
+
+  .form-card button {
+    width: 100%;
+  }
+  
+}

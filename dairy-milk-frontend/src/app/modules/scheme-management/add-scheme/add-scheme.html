@@ -1,0 +1,69 @@
+<div class="scheme-form-page">
+  <div class="sf-card">
+    <div class="sf-header">
+      <h5>{{ isEdit ? 'Edit Scheme' : 'Add Scheme' }}</h5>
+    </div>
+
+    <div class="sf-body">
+      <div class="sf-group">
+        <label>Scheme Name</label>
+        <input type="text" [(ngModel)]="scheme.schemeName" placeholder="e.g. Festival Bonus" />
+      </div>
+
+      <div class="sf-row">
+        <div class="sf-group">
+          <label>Scheme Type</label>
+          <select [(ngModel)]="scheme.schemeType">
+            <option value="">-- Select Type --</option>
+            <option value="INCENTIVE">Incentive / Bonus</option>
+            <option value="LOAN">Loan</option>
+            <option value="ADVANCE">Advance</option>
+            <option value="SUBSIDY">Subsidy</option>
+            <option value="FEED">Cattle Feed</option>
+          </select>
+        </div>
+
+        <div class="sf-group">
+          <label>Value Type</label>
+          <select [(ngModel)]="scheme.valueType">
+            <option value="FIXED">Fixed (₹)</option>
+            <option value="PERCENTAGE">Percentage (%)</option>
+          </select>
+        </div>
+
+        <div class="sf-group">
+          <label>Value</label>
+          <input type="number" [(ngModel)]="scheme.value" placeholder="0" />
+        </div>
+      </div>
+
+      <div class="sf-row">
+        <div class="sf-group">
+          <label>Start Date</label>
+          <input type="date" [(ngModel)]="scheme.startDate" />
+        </div>
+        <div class="sf-group">
+          <label>End Date</label>
+          <input type="date" [(ngModel)]="scheme.endDate" />
+        </div>
+        <div class="sf-group">
+          <label>Status</label>
+          <select [(ngModel)]="scheme.active">
+            <option [ngValue]="true">Active</option>
+            <option [ngValue]="false">Inactive</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="sf-group">
+        <label>Description</label>
+        <textarea [(ngModel)]="scheme.description" rows="3" placeholder="Scheme details..."></textarea>
+      </div>
+
+      <div class="sf-actions">
+        <button class="btn-save" (click)="saveScheme()">{{ isEdit ? 'Update' : 'Save' }} Scheme</button>
+        <button class="btn-cancel" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="scheme-page">
+  <div class="scheme-card">
+    <div class="scheme-header">
+      <h5>Scheme Management</h5>
+      <button class="btn-add" (click)="addNew()">+ Add Scheme</button>
+    </div>
+
+    <div class="scheme-body">
+      <div *ngIf="loading" class="scheme-empty">Loading...</div>
+
+      <table *ngIf="!loading && schemes.length > 0" class="scheme-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Value</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of schemes">
+            <td>{{ s.schemeName }}</td>
+            <td><span class="badge">{{ s.schemeType }}</span></td>
+            <td>
+              <span *ngIf="s.valueType === 'PERCENTAGE'">{{ s.value }}%</span>
+              <span *ngIf="s.valueType === 'FIXED'">₹ {{ s.value }}</span>
+            </td>
+            <td>{{ s.startDate }} → {{ s.endDate }}</td>
+            <td>
+              <span class="status" [class.active]="s.active" [class.inactive]="!s.active">
+                {{ s.active ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+            <td>
+              <button class="btn-edit" (click)="editScheme(s.id)">Edit</button>
+              <button class="btn-delete" (click)="deleteScheme(s.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="!loading && schemes.length === 0" class="scheme-empty">
+        No schemes added yet.
+      </div>
+    </div>
+  </div>
+</div>

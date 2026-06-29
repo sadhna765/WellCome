@@ -1,0 +1,69 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Milk Collection List</h4>
+    <button class="btn btn-warning" (click)="addCollection()">Add Collection</button>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <input type="date" class="form-control" [(ngModel)]="selectedDate"
+             (ngModelChange)="loadCollections()" />
+      <button class="btn btn-secondary btn-sm mt-2" (click)="clearDate()">Show All</button>
+    </div>
+    <div class="col-md-8">
+      <div class="d-flex gap-3">
+        <div class="card text-center px-4 py-2 bg-success text-white">
+          <small>Total Milk</small>
+          <strong>{{ summary.totalMilk | number:'1.2-2' }} L</strong>
+        </div>
+        <div class="card text-center px-4 py-2 bg-primary text-white">
+          <small>Total Amount</small>
+          <strong>Rs {{ summary.totalAmount | number:'1.2-2' }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-warning">
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Shift</th>
+          <th>Farmer</th>
+          <th>Quantity (L)</th>
+          <th>Fat</th>
+          <th>SNF</th>
+          <th>Rate</th>
+          <th>Amount (Rs)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of collections; let i = index"
+            [class.table-warning]="c.shift === 'MORNING'"
+            [class.table-info]="c.shift === 'EVENING'">
+          <td>{{ i + 1 }}</td>
+          <td>{{ c.collectionDate }}</td>
+          <td>
+            <span class="badge"
+                  [class.bg-warning]="c.shift === 'MORNING'"
+                  [class.text-dark]="c.shift === 'MORNING'"
+                  [class.bg-primary]="c.shift === 'EVENING'">
+              {{ c.shift }}
+            </span>
+          </td>
+          <td>{{ c.farmerName }}</td>
+          <td>{{ c.shift === 'MORNING' ? c.morningQuantity : c.eveningQuantity }}</td>
+          <td>{{ c.shift === 'MORNING' ? c.morningFat : c.eveningFat }}</td>
+          <td>{{ c.shift === 'MORNING' ? c.morningSnf : c.eveningSnf }}</td>
+          <td>{{ c.shift === 'MORNING' ? c.morningRate : c.eveningRate }}</td>
+          <td>{{ c.shift === 'MORNING' ? c.morningAmount : c.eveningAmount }}</td>
+        </tr>
+        <tr *ngIf="collections.length === 0">
+          <td colspan="9" class="text-center text-muted">No collections found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

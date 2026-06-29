@@ -1,0 +1,77 @@
+<div class="adv-wrapper">
+  <h1 class="adv-title">Module 5 — Advance Management</h1>
+
+  <!-- ADD FORM -->
+  <div class="adv-form-card">
+    <h3 class="form-heading">Naya Advance Entry</h3>
+
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Farmer</label>
+        <select [(ngModel)]="selectedFarmerId">
+          <option [ngValue]="null" disabled>-- Farmer chuno --</option>
+          <option *ngFor="let f of farmers" [ngValue]="f.id">{{ f.name }}</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>Date</label>
+        <input type="date" [(ngModel)]="advanceDate" />
+      </div>
+
+      <div class="form-field">
+        <label>Amount (₹)</label>
+        <input type="number" [(ngModel)]="amount" placeholder="Kitna advance" />
+      </div>
+
+      <div class="form-field">
+        <label>Reason</label>
+        <input type="text" [(ngModel)]="reason" placeholder="Kyun liya" />
+      </div>
+    </div>
+
+    <p class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+    <button class="save-btn" (click)="saveAdvance()" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Advance Add Karo' }}
+    </button>
+  </div>
+
+  <!-- LIST TABLE -->
+  <div class="adv-table-card">
+    <h3 class="form-heading">Advance History</h3>
+
+    <table class="adv-table" *ngIf="advances.length > 0; else noData">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Farmer</th>
+          <th>Amount</th>
+          <th>Reason</th>
+          <th>Balance</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let adv of advances">
+          <td>{{ adv.advanceDate }}</td>
+          <td>{{ getFarmerName(adv) }}</td>
+          <td>₹ {{ adv.amount }}</td>
+          <td>{{ adv.reason || '—' }}</td>
+          <td>
+            <span class="balance-badge" [class.cleared]="adv.balance === 0">
+              ₹ {{ adv.balance }}
+            </span>
+          </td>
+          <td>
+            <button class="del-btn" (click)="deleteAdvance(adv.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noData>
+      <p class="no-data">Abhi tak koi advance entry nahi hai.</p>
+    </ng-template>
+  </div>
+</div>

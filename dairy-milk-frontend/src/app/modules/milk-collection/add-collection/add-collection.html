@@ -1,0 +1,85 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-warning text-white">
+      <h5 class="mb-0">Add Milk Collection</h5>
+    </div>
+    <div class="card-body">
+
+      <!-- Farmer Select -->
+      <div class="mb-3">
+        <label class="form-label">Select Farmer</label>
+        <select class="form-select" [(ngModel)]="selectedFarmerId">
+          <option [ngValue]="null" disabled>-- Select Farmer --</option>
+          <option *ngFor="let f of farmers" [ngValue]="f.id">
+            {{ f.farmerId }} - {{ f.name }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Date & Shift -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Collection Date</label>
+          <input type="date" class="form-control" [(ngModel)]="collection.collectionDate" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Shift</label>
+          <select class="form-select" [(ngModel)]="collection.shift">
+            <option value="">-- Select Shift --</option>
+            <option value="MORNING">Morning</option>
+            <option value="EVENING">Evening</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Milk Type -->
+      <div class="mb-3">
+        <label class="form-label">Milk Type</label>
+        <select class="form-select" [(ngModel)]="milkType" (ngModelChange)="calculateRate()">
+          <option value="">-- Select Type --</option>
+          <option value="COW">Cow (गाय)</option>
+          <option value="BUFFALO">Buffalo (भैंस)</option>
+        </select>
+      </div>
+
+      <!-- Quantity, Fat, SNF -->
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Quantity (Litres)</label>
+          <input type="number" class="form-control" [(ngModel)]="collection.quantity"
+                 (ngModelChange)="calculateAmount()" placeholder="0.0" />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Fat %</label>
+          <input type="number" class="form-control" [(ngModel)]="collection.fat"
+                 (ngModelChange)="calculateRate()" placeholder="0.0" />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">SNF %</label>
+          <input type="number" class="form-control" [(ngModel)]="collection.snf"
+                 (ngModelChange)="calculateRate()" placeholder="0.0" />
+        </div>
+      </div>
+
+      <!-- Rate & Amount -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Rate (₹/Litre)</label>
+          <input type="number" class="form-control" [(ngModel)]="collection.rate"
+                 readonly placeholder="0.0" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Amount (₹)</label>
+          <input type="text" class="form-control bg-light" [value]="calculatedAmount" readonly />
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex gap-2">
+        <button class="btn btn-success" (click)="saveCollection()">Save Collection</button>
+        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+</div>

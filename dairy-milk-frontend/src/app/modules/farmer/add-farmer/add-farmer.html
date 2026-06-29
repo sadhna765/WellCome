@@ -1,0 +1,62 @@
+<div class="form-container">
+  <div class="form-header">
+    <h2>{{ isEditMode ? 'Edit Farmer' : 'Add New Farmer' }}</h2>
+    <button type="button" class="back-btn" (click)="cancel()">Back</button>
+  </div>
+
+  <form (ngSubmit)="saveFarmer()">
+    <div class="form-grid">
+
+      <div>
+        <label>Farmer ID</label>
+        <input type="text" [(ngModel)]="farmerData.farmerId" name="farmerId">
+      </div>
+
+      <div>
+        <label>Name</label>
+        <input type="text" [(ngModel)]="farmerData.name" name="name" required>
+      </div>
+
+      <div>
+        <label>Mobile Number</label>
+        <input type="text" [(ngModel)]="farmerData.mobile" name="mobile" required>
+      </div>
+
+      <div>
+        <label>Village</label>
+        <input type="text" [(ngModel)]="farmerData.village" name="village" required>
+      </div>
+
+      <div class="full-width">
+        <label>Address</label>
+        <textarea [(ngModel)]="farmerData.address" name="address"></textarea>
+      </div>
+
+      <div>
+        <label>Joining Date</label>
+        <input type="date" [(ngModel)]="farmerData.joiningDate" name="joiningDate" required>
+      </div>
+
+      <div>
+        <label>Aadhaar</label>
+        <input type="text" [(ngModel)]="farmerData.aadhaar" name="aadhaar">
+      </div>
+
+      <div>
+        <label>Status</label>
+        <select [(ngModel)]="farmerData.status" name="status">
+          <option value="ACTIVE">ACTIVE</option>
+          <option value="INACTIVE">INACTIVE</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="btn-box">
+      <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+      <button type="submit" class="save-btn">
+        {{ isEditMode ? 'Update Farmer' : 'Save Farmer' }}
+      </button>
+    </div>
+  </form>
+</div>

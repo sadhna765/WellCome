@@ -1,0 +1,102 @@
+<div class="payment-container">
+
+  <h2>💰 Payment Management</h2>
+
+  <div class="form-card">
+
+    <input
+      type="text"
+      placeholder="Farmer ID"
+      [(ngModel)]="payment.farmerId">
+
+    <input
+      type="text"
+      placeholder="Farmer Name"
+      [(ngModel)]="payment.farmerName">
+
+    <label>From Date</label>
+    <input
+      type="date"
+      [(ngModel)]="payment.fromDate">
+
+    <label>To Date</label>
+    <input
+      type="date"
+      [(ngModel)]="payment.toDate">
+
+    <input
+      type="number"
+      placeholder="Milk Amount"
+      [(ngModel)]="payment.milkAmount"
+      (input)="calculateNetAmount()">
+
+    <input
+      type="number"
+      placeholder="Feed Deduction"
+      [(ngModel)]="payment.feedDeduction"
+      (input)="calculateNetAmount()">
+
+    <input
+      type="number"
+      placeholder="Advance Deduction"
+      [(ngModel)]="payment.advanceDeduction"
+      (input)="calculateNetAmount()">
+
+    <input
+      type="number"
+      placeholder="Net Amount"
+      [(ngModel)]="payment.netAmount"
+      readonly>
+
+    <label>Payment Date</label>
+    
+    <input
+      type="date"
+      [(ngModel)]="payment.paymentDate">
+
+    <select [(ngModel)]="payment.status">
+      <option value="PAID">PAID</option>
+      <option value="PENDING">PENDING</option>
+    </select>
+
+    <button (click)="savePayment()">
+      Save Payment
+    </button>
+
+  </div>
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Farmer</th>
+          <th>Milk Amount</th>
+          <th>Feed Deduction</th>
+          <th>Advance</th>
+          <th>Net Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let p of payments; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{p.farmerName}}</td>
+          <td>{{p.milkAmount}}</td>
+          <td>{{p.feedDeduction}}</td>
+          <td>{{p.advanceDeduction}}</td>
+          <td>{{p.netAmount}}</td>
+          <td>{{p.status}}</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

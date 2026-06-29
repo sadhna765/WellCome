@@ -1,0 +1,167 @@
+<!-- Header -->
+ 
+<div class="page-header">
+  <div>
+    <h2 class="page-title">Collection Detail</h2>
+    <p class="page-sub">Milk Collection › View</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn primary" (click)="goToEdit()">✏️ Edit</button>
+    <button class="btn secondary" (click)="goBack()">← Back to List</button>
+  </div>
+</div>
+
+<!-- Error -->
+<div class="alert error" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+<!-- Loader -->
+<div class="loading-box" *ngIf="loading">
+  <div class="spinner"></div>
+  <p>Loading...</p>
+</div>
+
+<!-- Main Content -->
+<ng-container *ngIf="collection && !loading">
+
+  <!-- Top Summary Bar -->
+  <div class="summary-bar">
+    <div class="summary-item">
+      <span class="s-label">Farmer</span>
+      <span class="s-value">{{ collection.farmerName }}</span>
+    </div>
+    <div class="divider"></div>
+    <div class="summary-item">
+      <span class="s-label">Date</span>
+      <span class="s-value">{{ collection.collectionDate }}</span>
+    </div>
+    <div class="divider"></div>
+    <div class="summary-item">
+      <span class="s-label">Shift</span>
+      <span class="s-value">
+        <span class="badge"
+          [class.morning]="collection.shift === 'MORNING'"
+          [class.evening]="collection.shift === 'EVENING'">
+          {{ collection.shift === 'MORNING' ? '🌅 Morning' : '🌙 Evening' }}
+        </span>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <div class="summary-item">
+      <span class="s-label">Total Amount</span>
+      <span class="s-value amount">₹{{ collection.totalAmount }}</span>
+    </div>
+  </div>
+
+  <!-- Detail Cards Row -->
+  <div class="cards-row">
+
+    <!-- Farmer Info Card -->
+    <div class="card">
+      <h3 class="card-title">
+        <span class="card-icon">👨‍🌾</span> Farmer Info
+      </h3>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="label">Farmer Name</span>
+          <span class="value">{{ collection.farmerName }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Farmer Code</span>
+          <span class="value">{{ collection.farmerCode }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Shift</span>
+          <span class="badge"
+            [class.morning]="collection.shift === 'MORNING'"
+            [class.evening]="collection.shift === 'EVENING'">
+            {{ collection.shift }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Milk Info Card -->
+    <div class="card">
+      <h3 class="card-title">
+        <span class="card-icon">🥛</span> Milk Details
+      </h3>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="label">Quantity</span>
+          <span class="value highlight">{{ collection.quantity }} L</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Fat %</span>
+          <span class="value highlight">{{ collection.fatPercentage }}%</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">SNF %</span>
+          <span class="value highlight">{{ collection.snfPercentage }}%</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Collection Date</span>
+          <span class="value">{{ collection.collectionDate }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Info Card -->
+    <div class="card">
+      <h3 class="card-title">
+        <span class="card-icon">💰</span> Payment Details
+      </h3>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="label">Rate per Litre</span>
+          <span class="value">₹{{ collection.ratePerLitre }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Quantity</span>
+          <span class="value">{{ collection.quantity }} L</span>
+        </div>
+        <div class="detail-item total-row">
+          <span class="label">Total Amount</span>
+          <span class="value total">₹{{ collection.totalAmount }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Calculation Breakdown -->
+  <div class="card calc-card">
+    <h3 class="card-title">
+      <span class="card-icon">🧮</span> Calculation Breakdown
+    </h3>
+    <div class="calc-steps">
+
+      <div class="calc-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <span class="step-label">Total Amount</span>
+          <span class="step-formula">
+            Rate × Qty =
+            <strong>
+              ₹{{ collection.ratePerLitre }} ×
+              {{ collection.quantity }} L =
+              ₹{{ collection.totalAmount }}
+            </strong>
+          </span>
+        </div>
+      </div>
+
+      <div class="calc-total">
+        <span>Total Amount</span>
+        <strong>₹{{ collection.totalAmount }}</strong>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Actions -->
+  <div class="bottom-actions">
+    <button class="btn primary" (click)="goToEdit()">✏️ Edit</button>
+    <button class="btn secondary" (click)="goBack()">← Back to List</button>
+  </div>
+
+</ng-container>

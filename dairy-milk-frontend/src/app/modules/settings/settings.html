@@ -1,0 +1,46 @@
+<div class="settings-wrapper">
+  <h1 class="settings-title">Module — Settings</h1>
+
+  <div class="settings-card">
+    <h3 class="form-heading">Dairy Configuration</h3>
+
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Dairy Naam</label>
+        <input type="text" [(ngModel)]="settings.dairyName" placeholder="Dairy ka naam" />
+      </div>
+
+      <div class="form-field">
+        <label>Owner Naam</label>
+        <input type="text" [(ngModel)]="settings.ownerName" placeholder="Malik ka naam" />
+      </div>
+
+      <div class="form-field">
+        <label>Contact</label>
+        <input type="text" [(ngModel)]="settings.contact" placeholder="Phone number" />
+      </div>
+
+      <div class="form-field">
+        <label>Default Rate (per L)</label>
+        <input type="number" [(ngModel)]="settings.defaultRate" placeholder="Rs / litre" />
+      </div>
+
+      <div class="form-field">
+        <label>Currency</label>
+        <input type="text" [(ngModel)]="settings.currency" placeholder="Rs" />
+      </div>
+
+      <div class="form-field full-width">
+        <label>Address</label>
+        <textarea [(ngModel)]="settings.address" rows="2" placeholder="Dairy address"></textarea>
+      </div>
+    </div>
+
+    <p class="success-msg" *ngIf="successMsg">{{ successMsg }}</p>
+    <p class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+    <button class="save-btn" (click)="saveSettings()" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Settings Save Karo' }}
+    </button>
+  </div>
+</div>

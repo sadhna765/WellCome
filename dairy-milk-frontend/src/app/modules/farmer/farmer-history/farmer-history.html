@@ -1,0 +1,195 @@
+
+<div class="farmer-container">
+
+  <!-- Header -->
+  <div class="header">
+    <button class="action-btn" (click)="goBack()">← Back</button>
+    <h2>🧑‍🌾 {{ farmerName }} — Milk History</h2>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-section" style="flex-wrap: wrap; gap: 10px;">
+    <button class="filter-btn" [class.active-filter]="filterType === 'today'"
+            (click)="filterType = 'today'; applyFilter()">Today</button>
+    <button class="filter-btn" [class.active-filter]="filterType === 'yesterday'"
+            (click)="filterType = 'yesterday'; applyFilter()">Yesterday</button>
+    <button class="filter-btn" [class.active-filter]="filterType === 'week'"
+            (click)="filterType = 'week'; applyFilter()">This Week</button>
+    <button class="filter-btn" [class.active-filter]="filterType === 'year'"
+            (click)="filterType = 'year'; applyFilter()">This Year</button>
+    <button class="filter-btn" [class.active-filter]="filterType === 'all'"
+            (click)="filterType = 'all'; applyFilter()">All</button>
+    <button class="filter-btn" [class.active-filter]="filterType === 'custom'"
+            (click)="filterType = 'custom'; applyFilter()">Custom</button>
+    <ng-container *ngIf="filterType === 'custom'">
+      <input type="date" [(ngModel)]="customFrom" (change)="applyFilter()" />
+      <input type="date" [(ngModel)]="customTo" (change)="applyFilter()" />
+    </ng-container>
+    <select [(ngModel)]="selectedShift" (ngModelChange)="applyFilter()">
+      <option value="ALL">All Shifts</option>
+      <option value="MORNING">Morning</option>
+      <option value="EVENING">Evening</option>
+    </select>
+  </div>
+
+  <!-- Milk Summary -->
+  <div style="display: flex; gap: 16px; margin: 16px 0;">
+    <div style="background:#198754; color:white; border-radius:8px; padding: 12px 24px;">
+      <small>Total Milk</small><br>
+      <strong>{{ summary.totalMilk | number:'1.2-2' }} L</strong>
+    </div>
+    <div style="background:#0d6efd; color:white; border-radius:8px; padding: 12px 24px;">
+      <small>Total Amount</small><br>
+      <strong>Rs {{ summary.totalAmount | number:'1.2-2' }}</strong>
+    </div>
+    <div style="background:#6c757d; color:white; border-radius:8px; padding: 12px 24px;">
+      <small>Total Records</small><br>
+      <strong>{{ filteredRecords.length }}</strong>
+    </div>
+  </div>
+
+  <!-- Milk Table -->
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Shift</th>
+          <th>Quantity (L)</th>
+          <th>Fat</th>
+          <th>SNF</th>
+          <th>Rate</th>
+          <th>Amount (Rs)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="filteredRecords.length === 0">
+          <td colspan="8" style="text-align:center;">No records found</td>
+        </tr>
+        <tr *ngFor="let c of filteredRecords; let i = index"
+            [style.background]="c.shift === 'MORNING' ? '#fff8e1' : '#e3f2fd'">
+          <td>{{ i + 1 }}</td>
+          <td>{{ c.collectionDate }}</td>
+          <td>
+            <span [style.background]="c.shift === 'MORNING' ? '#ffc107' : '#0d6efd'"
+                  [style.color]="c.shift === 'MORNING' ? '#000' : '#fff'"
+                  style="padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              {{ c.shift }}
+            </span>
+          </td>
+          <td>{{ getQty(c) }}</td>
+          <td>{{ getFat(c) }}</td>
+          <td>{{ getSnf(c) }}</td>
+          <td>{{ getRate(c) }}</td>
+          <td>{{ getAmount(c) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════ -->
+  <!-- CATTLE FEED SECTION           -->
+  <!-- ══════════════════════════════ -->
+  <div style="margin-top: 40px;">
+        
+    <!-- Add Feed Form -->
+
+    <!-- Cattle Feed Header -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+  
+      <h3 style="margin:0;">🌾 Cattle Feed</h3>
+         
+ 
+     
+    </div>
+   
+     
+    <div *ngIf="showAddFeed" style="background:#f8f9fa; padding:16px; border-radius:8px; margin-bottom:16px;">
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div>
+       
+          <label>Date " "</label><br>
+          <input type="date" [(ngModel)]="newFeed.feedDate" />
+        </div>
+       
+        <div>
+          <label>Feed Type " "</label><br>
+          <input type="text" [(ngModel)]="newFeed.feedType" readonly
+                 style="background:#e9ecef;" />
+        </div>
+        <div>
+          <label>Quantity (Kg)" "</label><br>
+          <input type="number" [(ngModel)]="newFeed.quantity"
+                 (ngModelChange)="calculateAmount()" placeholder="0" />
+        </div>
+        <div>
+          <label>Rate (Rs/Kg)" "</label><br>
+          <input type="number" [(ngModel)]="newFeed.rate"
+                 (ngModelChange)="calculateAmount()" placeholder="0" />
+        </div>
+        <div>
+          <label>Amount (Rs)" "</label><br>
+          <input type="number" [(ngModel)]="newFeed.amount" readonly
+                 style="background:#e9ecef;" />
+        </div>
+        <button class="add-btn" (click)="saveFeed()">Save</button>
+        <div style="display:flex; align-items:flex-end;">
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Feed Summary -->
+    <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+      <div style="background:#fd7e14; color:white; border-radius:8px; padding: 12px 24px;">
+        <small>Total Quantity</small><br>
+        <strong>{{ cattleFeedSummary.totalQuantity | number:'1.2-2' }} Kg</strong>
+      </div>
+      <div style="background:#6610f2; color:white; border-radius:8px; padding: 12px 24px;">
+        <small>Total Amount</small><br>
+        <strong>Rs {{ cattleFeedSummary.totalAmount | number:'1.2-2' }}</strong>
+        
+      </div>
+      
+       <button class= "      add-btn   " (click)="showAddFeed = !showAddFeed">
+        {{ showAddFeed ? 'Cancel' : '+ Add Feed' }}
+      </button>
+    </div>
+
+    <!-- Feed Table -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Feed Type</th>
+            <th>Quantity (Kg)</th>
+            <th>Rate (Rs/Kg)</th>
+            <th>Amount (Rs)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="cattleFeedRecords.length === 0">
+            <td colspan="7" style="text-align:center;">No feed records found</td>
+          </tr>
+          <tr *ngFor="let f of cattleFeedRecords; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ f.feedDate }}</td>
+            <td>{{ f.feedType }}</td>
+            <td>{{ f.quantity }}</td>
+            <td>{{ f.rate }}</td>
+            <td>{{ f.amount }}</td>
+            <td>
+              <button class="action-btn status-btn" (click)="deleteFeed(f.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

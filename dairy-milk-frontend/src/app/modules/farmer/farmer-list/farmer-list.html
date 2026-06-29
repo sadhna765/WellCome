@@ -1,0 +1,84 @@
+<div class="farmer-container">
+
+  <div class="header">
+    <h2>Farmer Management</h2>
+    <button class="add-btn" (click)="addCollection()">
+      + Collection
+    </button>
+    <button class="add-btn" (click)="addFarmer()">
+      + New Farmer
+    </button>
+  </div>
+
+  <div class="filter-section">
+    <input type="text" placeholder="Search by ID, Name or Mobile" [(ngModel)]="searchText" />
+    <select [(ngModel)]="statusFilter">
+      <option value="All">All Status</option>
+      <option value="ACTIVE">ACTIVE</option>
+      <option value="INACTIVE">INACTIVE</option>
+    </select>
+  </div>
+
+  <p>Total Farmers: {{ farmers.length }}</p>
+  <p>Filtered Farmers: {{ filteredFarmers.length }}</p>
+  <p>Status Filter: {{ statusFilter }}</p>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Farmer ID</th>
+          <th>Name</th>
+          <th>Mobile</th>
+          <th>Village</th>
+          <th>Joining Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngIf="filteredFarmers.length === 0">
+          <td colspan="7" style="text-align:center;">
+            No Farmers Found
+          </td>
+        </tr>
+
+        <tr *ngFor="let farmer of filteredFarmers">
+          <td>{{ farmer.farmerId }}</td>
+          <td>{{ farmer.name }}</td>
+          <td>{{ farmer.mobile }}</td>
+          <td>{{ farmer.village }}</td>
+          <td>{{ farmer.joiningDate }}</td>
+
+          <td>
+            <span [class.active]="farmer.status === 'ACTIVE'"
+                  [class.inactive]="farmer.status === 'INACTIVE'">
+              {{ farmer.status }}
+            </span>
+          </td>
+
+          <td>
+            
+
+            <button class="action-btn edit-btn" (click)="editFarmer(farmer.farmerId)">
+              Edit
+            </button>
+
+            <!-- History button — table ke andar hai ab -->
+            <button class="action-btn history-btn" (click)="viewHistory(farmer.farmerId, farmer.name)">
+              History
+            </button>
+
+            <button class="action-btn status-btn" (click)="toggleStatus(farmer)">
+              {{ farmer.status === 'ACTIVE' ? 'Deactivate' : 'Activate' }}
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>

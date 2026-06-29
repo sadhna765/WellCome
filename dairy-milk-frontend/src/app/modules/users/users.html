@@ -1,0 +1,74 @@
+<div class="users-wrapper">
+  <h1 class="users-title">Module — Users</h1>
+
+  <!-- ADD FORM -->
+  <div class="users-form-card">
+    <h3 class="form-heading">Naya User Add Karo</h3>
+
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Naam</label>
+        <input type="text" [(ngModel)]="name" placeholder="Poora naam" />
+      </div>
+
+      <div class="form-field">
+        <label>Username</label>
+        <input type="text" [(ngModel)]="username" placeholder="Login username" />
+      </div>
+
+      <div class="form-field">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="password" placeholder="Password" />
+      </div>
+
+      <div class="form-field">
+        <label>Role</label>
+        <select [(ngModel)]="role">
+          <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+    <button class="save-btn" (click)="saveUser()" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'User Add Karo' }}
+    </button>
+  </div>
+
+  <!-- LIST TABLE -->
+  <div class="users-table-card">
+    <h3 class="form-heading">All Users</h3>
+
+    <table class="users-table" *ngIf="users.length > 0; else noData">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of users">
+          <td>{{ u.name }}</td>
+          <td>{{ u.username }}</td>
+          <td><span class="role-badge">{{ u.role }}</span></td>
+          <td>
+            <span class="status-badge" [class.active]="u.active" [class.inactive]="!u.active">
+              {{ u.active ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>
+            <button class="del-btn" (click)="deleteUser(u.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noData>
+      <p class="no-data">Abhi tak koi user nahi hai.</p>
+    </ng-template>
+  </div>
+</div>

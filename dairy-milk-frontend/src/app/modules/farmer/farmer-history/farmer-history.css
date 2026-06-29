@@ -1,0 +1,292 @@
+/* ========================================
+   MAIN CONTAINER
+======================================== */
+.farmer-container {
+  padding: 20px;
+  background: #f4f7fb;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+.action-btn,
+.add-btn,
+.filter-btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.action-btn {
+  background: #198754;
+  color: #fff;
+  padding: 10px 16px;
+}
+
+.action-btn:hover {
+  background: #157347;
+}
+
+.add-btn {
+  background: #0d6efd;
+  color: white;
+  padding: 10px 18px;
+}
+
+.add-btn:hover {
+  background: #0b5ed7;
+}
+
+.filter-btn {
+  background: white;
+  border: 1px solid #d6dce5;
+  color: #495057;
+  padding: 8px 14px;
+}
+
+.filter-btn:hover {
+  background: #e9ecef;
+}
+
+.active-filter {
+  background: #198754 !important;
+  color: white !important;
+  border-color: #198754 !important;
+}
+
+/* ========================================
+   FILTER SECTION
+======================================== */
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.filter-section input,
+.filter-section select {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  outline: none;
+}
+
+.filter-section input:focus,
+.filter-section select:focus {
+  border-color: #198754;
+}
+
+/* ========================================
+   SUMMARY CARDS
+======================================== */
+.card {
+  min-width: 180px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card small {
+  font-size: 13px;
+}
+
+.card strong {
+  font-size: 20px;
+}
+
+/* ========================================
+   TABLE
+======================================== */
+.table-wrapper {
+  background: white;
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+  margin-top: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+thead {
+  background: #198754;
+  color: white;
+}
+
+thead th {
+  padding: 14px;
+  text-align: center;
+  font-size: 14px;
+}
+
+tbody td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e9ecef;
+}
+
+tbody tr:hover {
+  background: #f8f9fa !important;
+}
+
+/* ========================================
+   SHIFT BADGES
+======================================== */
+.shift-morning {
+  background: #ffc107;
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.shift-evening {
+  background: #0d6efd;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ========================================
+   CATTLE FEED SECTION
+======================================== */
+h3 {
+  color: #343a40;
+  font-weight: 600;
+}
+
+.feed-form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.feed-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.feed-form input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.feed-form input:focus {
+  border-color: #198754;
+  outline: none;
+}
+
+/* ========================================
+   DELETE BUTTON
+======================================== */
+.status-btn {
+  background: #dc3545;
+}
+
+.status-btn:hover {
+  background: #bb2d3b;
+}
+
+/* ========================================
+   FORM INPUTS
+======================================== */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  height: 38px;
+  font-size: 14px;
+}
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #adb5bd;
+  border-radius: 20px;
+}
+
+/* ========================================
+   MOBILE RESPONSIVE
+======================================== */
+@media (max-width: 768px) {
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header h2 {
+    font-size: 20px;
+  }
+
+  .filter-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-btn,
+  .action-btn,
+  .add-btn {
+    width: 100%;
+    
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 800px;
+  }
+}

@@ -1,0 +1,36 @@
+.scheme-form-page {
+  max-width: 760px;
+  margin: 24px auto;
+  padding: 0 16px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+.sf-card {
+  background: #fff; border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08); overflow: hidden;
+}
+.sf-header { background: linear-gradient(135deg, #1e9e6a, #157a51); padding: 16px 24px; }
+.sf-header h5 { margin: 0; color: #fff; font-size: 19px; font-weight: 700; }
+.sf-body { padding: 24px; }
+
+.sf-row { display: flex; flex-wrap: wrap; gap: 16px; }
+.sf-group { display: flex; flex-direction: column; flex: 1 1 200px; margin-bottom: 16px; }
+.sf-group label { font-size: 13px; font-weight: 600; color: #4a5a52; margin-bottom: 6px; }
+.sf-group input, .sf-group select, .sf-group textarea {
+  padding: 10px 12px; border: 1px solid #cdd8d2; border-radius: 8px;
+  font-size: 14px; outline: none; transition: border-color .15s, box-shadow .15s;
+}
+.sf-group input:focus, .sf-group select:focus, .sf-group textarea:focus {
+  border-color: #1e9e6a; box-shadow: 0 0 0 3px rgba(30,158,106,.15);
+}
+
+.sf-actions { display: flex; gap: 12px; margin-top: 8px; }
+.btn-save {
+  background: #1e9e6a; color: #fff; border: none;
+  padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.btn-save:hover { background: #157a51; }
+.btn-cancel {
+  background: #e9eef0; color: #4a5a52; border: none;
+  padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.btn-cancel:hover { background: #dde4e6; }

@@ -1,0 +1,5 @@
+private String shift; // "MORNING" ya "EVENING"
+
+// Getter & Setter
+public String getShift() { return shift; }
+public void setShift(String shift) { this.shift = shift; }
